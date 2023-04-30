@@ -1,22 +1,23 @@
 <template>
   <div class="calculator">
-    <Display value="1000"/>
-    <Button label="AC" triple/>
-    <Button label="/" operation/>
-    <Button label="7" />
-    <Button label="8" />
-    <Button label="9" />
-    <Button label="*" operation/>
-    <Button label="4" />
-    <Button label="5" />
-    <Button label="_" operation/>
-    <Button label="1" />
-    <Button label="2" />
-    <Button label="3" />
-    <Button label="+" operation/>
-    <Button label="0" double/>
-    <Button label="." />
-    <Button label="=" operation/>
+    <Display :value="displayValue"/>
+    <Button label="AC" triple @onClick ="clearMemory"/>
+    <Button label="/" operation @onClick="setOperation"/>
+    <Button label="7" @onClick ="addDigit"/>
+    <Button label="8" @onClick ="addDigit"/>
+    <Button label="9" @onClick ="addDigit"/>
+    <Button label="*" operation @onClick="setOperation"/>
+    <Button label="4" @onClick ="addDigit"/>
+    <Button label="5" @onClick ="addDigit"/>
+    <Button label="6" @onClick ="addDigit"/>
+    <Button label="_" operation @onClick="setOperation"/>
+    <Button label="1" @onClick ="addDigit"/>
+    <Button label="2" @onClick ="addDigit"/>
+    <Button label="3" @onClick ="addDigit"/>
+    <Button label="+" operation @onClick="setOperation" />
+    <Button label="0" double @onClick ="addDigit"/>
+    <Button label="." @onClick ="addDigit"/>
+    <Button label="=" operation @onClick="setOperation"/>
   </div>
 </template>
 
@@ -25,7 +26,35 @@ import Display from "../components/Display.vue"
 import Button from "../components/Button.vue"
 
 export default {
-    components: { Button, Display }
+    data: function(){
+        return {
+            displayValue: "0",
+            clearDisplay: false,
+            operation: null,
+            values: [0, 0],
+            current: 0
+
+        }
+    },
+    components: { Button, Display },
+    methods: {
+        clearMemory() {
+           Object.assing(this.$data, this.$options.data())
+        },
+        setOperation(operation){
+            
+        },
+        addDigit(n) {
+            if(n === "." && this.diisplay.includes("."))
+        },
+
+        const clearDisplay = this.displayValue === "0",
+            || this.clearDisplay,
+        const currentValue = cleartDisplay ? "" : this.displayValue,
+        const displayValue = currentValue + n,
+
+        this.displayValue = displayValue,
+    }
 }
 </script>
 
