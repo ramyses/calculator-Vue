@@ -39,13 +39,51 @@ export default {
     components: { Button, Display },
     methods: { 
         clearMemory() {
-            console.log('Limpar Memoria!')
+            Object.assign(this.$data, this.$options.data())
         },
         setOperation(operation) {
-            console.log('operacao ' + operation)
+            if(this.current === 0){
+                this.operation = operation
+                this.current = 1
+                this.clearDisplay = true
+            }else {
+                const equals = operation === "="
+                const currentOperation = this.operation
+
+                try {
+                    this.values[0] = eval(
+                        `${this.values[0]} ${currentOperation} ${this.values[1]}`
+                    )
+                }catch(e) {
+                    this.$emit('onError', e)
+                }
+
+                this.values[1] = 0
+                this.displayValue = this.values[0]
+                this.operation = equals ? null : operation
+                this.current = equals ? 0 : 1
+                this.clearDisplay = !equals
+            }
         },
         addDigit(n) {
-            console.log('Digito ' + n)
+            if(n === "." && this.displayValue.includes(",")){
+                return
+            }
+
+            const clearDisplay = this.displayValue === "0"
+                || this.clearDisplay
+            const currentValue = clearDisplay ? "" : this.displayValue
+            const displayValue = currentValue + n
+
+            this.displayValue = displayValue
+            this.clearDisplay = false
+            this.values[this.current] = displayValue
+
+            // if(n !== ".") {
+            //     const i = this.current
+            //     const newValue = parseFloat(displayValue)
+            //     this.values[i] = newValue
+            // }
         }
     }
 }
