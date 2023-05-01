@@ -22,38 +22,31 @@
 </template>
 
 <script>
-import Display from "../components/Display.vue"
+
 import Button from "../components/Button.vue"
+import Display from "../components/Display.vue"
 
 export default {
-    data: function(){
+    data: function() {
         return {
             displayValue: "0",
             clearDisplay: false,
             operation: null,
             values: [0, 0],
             current: 0
-
         }
     },
     components: { Button, Display },
-    methods: {
+    methods: { 
         clearMemory() {
-           Object.assing(this.$data, this.$options.data())
+            console.log('Limpar Memoria!')
         },
-        setOperation(operation){
-            
+        setOperation(operation) {
+            console.log('operacao ' + operation)
         },
         addDigit(n) {
-            if(n === "." && this.diisplay.includes("."))
-        },
-
-        const clearDisplay = this.displayValue === "0",
-            || this.clearDisplay,
-        const currentValue = cleartDisplay ? "" : this.displayValue,
-        const displayValue = currentValue + n,
-
-        this.displayValue = displayValue,
+            console.log('Digito ' + n)
+        }
     }
 }
 </script>
